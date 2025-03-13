@@ -1,0 +1,8 @@
+boto3
+langchain-community
+langchain-core
+pypdf
+faiss.cpu
+chromadb
+python-dotenv
+langchain_chroma
