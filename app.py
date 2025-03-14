@@ -135,7 +135,7 @@ if st.button("Generate"):
             answer=qa({"query":summary})
             
             st.title("Question generated successfully!")
-            st.text_area(answer['result'])
+            st.write(answer['result'])
         else:  
             st.info("Please upload a PDF file or enter the token size")          
 
