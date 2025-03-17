@@ -58,24 +58,23 @@ prompt_template = """
     {content}
     ------------
 
-    Create questions with answers that will prepare the coders or programmers for their tests.
+    Create questions that will prepare the coders or programmers for their tests.
     Make sure not to lose any important information.
 
-    Based on the above content, generate a set of relevant questions along with their answers.
+    Based on the above content, generate a set of relevant questions .
     Ensure that:
     - Each question is numbered (1., 2., 3., etc.).
-    - The answer immediately follows the question.
     - The questions thoroughly cover the key concepts from the given content.
 
     Example format:
 
     1. [Question 1]
-       Answer: [Answer to Question 1]
+      
 
     2. [Question 2]
-       Answer: [Answer to Question 2]
+      
 
-    Now, generate the questions and answers:
+    Now, generate the questions :
     """
 PROMPT = PromptTemplate(input_variables=["content"],
     template=prompt_template 
@@ -134,7 +133,7 @@ if st.button("Generate"):
             chain=load_summarize_chain(llm,chain_type="stuff",prompt=prompt,verbose=True)
             summary=chain.run(input)
 
-           #st.write(type(summary))
+            #st.write(type(summary))
 
 
             
