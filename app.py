@@ -22,6 +22,19 @@ import os
 
 
 
+def save_blog_details_s3(s3_key,s3_bucket,generate_blog):
+    s3=boto3.client(service_name="s3",
+                     aws_access_key_id=os.getenv('AWS_KEY_ID'),
+                     aws_secret_access_key=os.getenv('AWS_ACCESS_KEY'),
+                     region_name="us-east-1")
+
+    try:
+        s3.put_object(Bucket = s3_bucket, Key = s3_key, Body =generate_blog )
+        print("Code saved to s3")
+
+    except Exception as e:
+        print(e) 
+
 
 bedrock=boto3.client(service_name="bedrock-runtime",
                      aws_access_key_id=os.getenv('AWS_KEY_ID'),
@@ -64,6 +77,9 @@ prompt_template = """
 
     Now, generate the questions and answers:
     """
+PROMPT = PromptTemplate(input_variables=["content"],
+    template=prompt_template 
+)
 
 # Streamlit UI
 st.title("📂 Upload a PDF to Extract Interview Question")
@@ -101,9 +117,7 @@ def create_vector_embeddings():
 
 
 
-PROMPT = PromptTemplate(input_variables=["content"],
-    template=prompt_template 
-)
+
 token_size= st.number_input("Enter the token size:", min_value=0, max_value=10000)
 
 
@@ -136,6 +150,10 @@ if st.button("Generate"):
             
             st.title("Question generated successfully!")
             st.write(answer['result'])
+            s3_key="generated_qn.txt"
+            s3_bucket='awsbedrockblogs3'
+            save_blog_details_s3(s3_key,s3_bucket,answer['result'])
+
         else:  
             st.info("Please upload a PDF file or enter the token size")          
 
