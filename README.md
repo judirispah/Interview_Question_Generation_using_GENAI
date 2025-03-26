@@ -36,41 +36,37 @@ AWS S3 – Cloud storage for saving generated questions
 
 📦 Installation & Setup
 1️⃣ Clone the Repository
-bash
-Copy
-Edit
+
 git clone https://github.com/your-username/interview-question-generator.git
 cd interview-question-generator
 2️⃣ Create a Virtual Environment & Activate It
-bash
-Copy
-Edit
+
 python -m venv venv
 source venv/bin/activate   # macOS/Linux
 venv\Scripts\activate      # Windows
 3️⃣ Install Dependencies
-bash
-Copy
-Edit
+
+
+
 pip install -r requirements.txt
 4️⃣ Set Up Environment Variables
 Create a .env file in the project directory and add the following credentials:
 
-plaintext
-Copy
-Edit
+
+
 AWS_KEY_ID=your_aws_key
 AWS_ACCESS_KEY=your_aws_secret
 AWS_REGION=us-east-1
 MODEL_ID=amazon.titan-embed-text-v1
 OLLAMA_MODEL=mistral
+
+
 5️⃣ Run the Application
-bash
-Copy
-Edit
+
+
+
 streamlit run app.py
-📸 Screenshots & Demo
-(Add relevant screenshots or a demo link here to showcase the UI & functionality.)
+
 
 📊 How It Works?
 Step 1: Upload a PDF File 📂
