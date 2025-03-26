@@ -63,12 +63,7 @@ This application is beneficial for:
    - It formulates **structured interview questions with answers** based on the retrieved information.  
 
 
-## 📦 Installation & Setup  
 
-### 1️⃣ Clone the Repository  
-```bash
-git clone https://github.com/your-username/interview-question-generator.git
-cd interview-question-generator
 
 # 🔍 How It Works?
 
@@ -94,6 +89,26 @@ cd interview-question-generator
 - Feedback is provided on:  
   - ✅ **Correctness**  
   - ❌ **Missing Key Points**  
-  - 📝 **Suggestions for Improvement**  
+  - 📝 **Suggestions for Improvement**
+    
+    ## 📦 Installation & Setup  
+
+### 1️⃣ Clone the Repository  
+```bash
+git clone https://github.com/your-username/interview-question-generator.git
+cd interview-question-generator
+
+python -m venv venv
+
+pip install -r requirements.txt
+
+#Create a .env file in the project directory and add the following credentials:
+
+
+AWS_KEY_ID=your_aws_key
+AWS_ACCESS_KEY=your_aws_secret
+AWS_REGION=us-east-1
+
+
 
 
