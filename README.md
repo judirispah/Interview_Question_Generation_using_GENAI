@@ -2,7 +2,7 @@
 
 📄 AI-Powered Interview Question Generator with Automated Evaluation
 🚀 Overview
-The AI-Powered Interview Question Generator is a Streamlit-based web application that extracts content from PDF documents, generates relevant interview questions using LangChain and Mistral LLM (via Ollama), and evaluates user responses using AI. The generated questions are stored in AWS S3, making them accessible for further analysis.
+The AI-Powered Interview Question Generator is a Streamlit-based web application that extracts content from PDF documents, generates relevant interview questions using LangChain Bedrock, and evaluates user responses using AI. The generated questions are stored in AWS S3, making them accessible for further analysis.
 
 This project is designed to help individuals practice interview questions by providing AI-generated questions and detailed feedback on user responses based on correctness, key points, and improvement suggestions.
 
@@ -23,10 +23,9 @@ Streamlit – UI development
 
 LangChain – LLM orchestration
 
-FastAPI (Optional) – For backend API (future enhancement)
 
 AI Models & Processing:
-Mistral (via Ollama) – LLM for question generation and evaluation
+Mistral (Amazon Bedrock) – LLM for question generation and evaluation
 
 Amazon Bedrock – Text embedding model for vector storage
 
@@ -34,15 +33,6 @@ Database & Cloud Storage:
 ChromaDB – Vector database for storing question embeddings
 
 AWS S3 – Cloud storage for saving generated questions
-
-Tools & Services:
-Docker – Containerization for deployment
-
-GitHub Actions – CI/CD automation
-
-MLflow – Model tracking (planned feature)
-
-dotenv – For managing environment variables
 
 📦 Installation & Setup
 1️⃣ Clone the Repository
