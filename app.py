@@ -51,7 +51,7 @@ question_prompt = PromptTemplate(
     You are an expert at creating questions with answers based on coding materials and documentation in any language.
     Your goal is to prepare a coder for their exams and coding tests.
     
-    Based on the text below, generate **2 relevant questions**:
+    Based on the text below, generate **10 relevant questions**:
     
     ------------
     {context}
@@ -127,7 +127,9 @@ if st.button("Generate Questions"):
     with st.spinner("Processing..."):
         if uploaded_file:
             input_docs, vector_store = create_vector_embeddings()
-            llm = Ollama(model="mistral")
+            #llm = Ollama(model="mistral")
+            llm=Bedrock(model_id="mistral.mistral-7b-instruct-v0:2",client=bedrock,
+                 model_kwargs={'max_tokens':200})
 
             # Summarize the document
             chain = load_summarize_chain(llm, chain_type="refine", refine_prompt=summary_prompt, verbose=True)
