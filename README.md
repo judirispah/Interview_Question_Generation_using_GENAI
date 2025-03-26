@@ -95,7 +95,7 @@ This application is beneficial for:
 
 ### 1️⃣ Clone the Repository  
 ```bash
-git clone https://github.com/your-username/interview-question-generator.git
+git clone https://github.com/judirispah/interview-question-generator.git
 cd interview-question-generator
 
 python -m venv venv
