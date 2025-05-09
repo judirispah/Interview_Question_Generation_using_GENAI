@@ -13,9 +13,17 @@ from langchain.prompts import PromptTemplate
 from langchain.chains.summarize import load_summarize_chain
 from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
+from langchain_groq import ChatGroq
+from langchain_community.embeddings import OllamaEmbeddings
 
-# Load environment variables
 load_dotenv()
+
+##load groq api
+os.environ['GROQ_API_KEY']=os.getenv('GROQ_API_KEY')
+
+
+
+
 
 # Initialize AWS Bedrock Client
 bedrock = boto3.client(
@@ -105,7 +113,8 @@ if uploaded_file:
 
 # Function to process PDF and generate vector embeddings
 def create_vector_embeddings():
-    embeddings = BedrockEmbeddings(model_id="amazon.titan-embed-text-v1")
+    #embeddings = BedrockEmbeddings(model_id="amazon.titan-embed-text-v1")
+    embeddings=(OllamaEmbeddings(model='gemma2:2b'))
     loader = PyPDFDirectoryLoader(temp_dir)
     docs = loader.load()
     
@@ -128,8 +137,11 @@ if st.button("Generate Questions"):
         if uploaded_file:
             input_docs, vector_store = create_vector_embeddings()
             #llm = Ollama(model="mistral")
-            llm=Bedrock(model_id="mistral.mistral-7b-instruct-v0:2",client=bedrock,
-                 model_kwargs={'max_tokens':200})
+            #llm=Bedrock(model_id="mistral.mistral-7b-instruct-v0:2",client=bedrock,
+                 #model_kwargs={'max_tokens':200})
+            groq_api_key=os.getenv('GROQ_API_KEY')   
+            llm=ChatGroq(groq_api_key=groq_api_key,model_name="gemma2-9b-it")
+     
 
             # Summarize the document
             chain = load_summarize_chain(llm, chain_type="refine", refine_prompt=summary_prompt, verbose=True)
@@ -154,9 +166,9 @@ if st.button("Generate Questions"):
             
 
             st.title("✅ Questions Generated!")
-            s3_key = "generated_questions.txt"
-            s3_bucket = 'awsbedrockblogs3'
-            save_to_s3(s3_key, s3_bucket, questions)
+            #s3_key = "generated_questions.txt"
+            #s3_bucket = 'awsbedrockblogs3'
+            #save_to_s3(s3_key, s3_bucket, questions)
 
              # Extract questions and answers using regex
             qa_pairs = re.findall(r'\d+\.\s(.*?)\s*\(Answer:\s*(.*?)\)', questions, re.DOTALL)
@@ -234,6 +246,7 @@ if st.session_state.questions:
         - Assess correctness (with ✅ for correct and ❌ for incorrect)
         - Identify missing key points (if any)
         - Provide improvement suggestions
+        -provide the accuracy of similarity
 
        
         
